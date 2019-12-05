@@ -1,0 +1,92 @@
+<canvas id="my_canvas" width="600"
+ style="border:2px solid #000000; height:300px;"></canvas>
+ <script>
+var data = [['Class-5',140,100,134],['Class-4',150,130,44,33]
+,['Class-3',170,100,23],['Class-2',110,60,134],['Class-1',170,85,34]];
+var color =['#00aa00','#66cc44','#ff11aa','#FF2578']
+var txtcolor=["oiojoia","bikioj","coij","oiij"]
+
+
+
+
+// dont touche the code just add your data and it color and color name 
+
+
+var my_canvas=document.getElementById("my_canvas");
+var gctx=my_canvas.getContext("2d");
+///////// Settings  ////////// 
+var bar_width=50;
+
+//Gap between Bars including width of the bar
+var bar_gap=10;
+
+my_canvas.height=data.length * (  bar_gap+bar_width)  +90;
+
+////////////end of settings ////
+//gctx.moveTo(y,x-5);
+// Base line of graph 
+
+//gctx.stroke();
+/// add shadow ///
+gctx.shadowColor = '#000000';
+gctx.shadowOffsetX=2;
+gctx.shadowOffsetY=2;
+gctx.shadowBlur = 2;
+/////////// Draw the graph ////////
+var y=10;
+var text=50
+gctx.shadowColor = '#ffffff'; 
+//font for base label showing classes 
+gctx.font = '18px serif';
+gctx.textAlign='left';
+gctx.textBaseline='top';
+gctx.fillStyle= '#008cf5';
+// Write base text for classes 
+
+
+   
+gctx.font = '12px serif'; //font at top of the bar 
+//gctx.fillStyle= '#000000';
+//text at top of the bar 
+gctx.beginPath();
+gctx.lineWidth=2;
+
+
+// afichage des class
+for (var i=0;i<data.length;i++){
+var xx =20;
+gctx.fillStyle="red";
+gctx.fillText(data[i][0], xx-10,i*(bar_gap+bar_width+5)+30);
+
+}
+
+// afichage de la line rouge 
+gctx.fillRect(67,y,3,data.length*(bar_gap+bar_width+5)); 
+
+
+// afichage des bars
+for (var i=0;i<data.length;i++){
+var x =20+text
+for (j=1;j<data[i].length;j++){ 
+gctx.fillStyle= color[j-1];
+//Filled colour of the bar showing pass students
+gctx.fillRect(x,y,data[i][j],bar_width); 
+gctx.fillStyle= "black";
+gctx.fillText(data[i][j],x+10,y+20,20,20);
+gctx.fillStyle= color[j-1];
+gctx.strokeRect(x,y,data[i][j],bar_width); 
+//gctx.strokeRect(x,y,1,data[i][1]);
+x+=data[i][j];
+
+}
+y +=bar_gap+bar_width+5;
+}// end of for loop 
+
+
+// afichage des colors
+for (j=0;j<color.length;j++){
+gctx.fillStyle= color[j];
+gctx.fillRect(180+(j*70),y+20,20,20);
+gctx.fillText(txtcolor[j],150+(j*70),y+20,20,20);
+ }
+</script>
